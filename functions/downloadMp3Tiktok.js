@@ -21,19 +21,25 @@ module.exports = async function (ctx) {
         const page = await browser.newPage();
 
         // go page
-        await page.goto('https://ssstik.io/es/download-tiktok-mp3', { waitUntil: 'networkidle2' });
+        await page.goto('https://tiktokio.com/es/tik-tok-mp3/', { waitUntil: 'networkidle2' });
 
         // write URL Video Music
-        await page.type('input[id="main_page_text"]', input);
+        await page.type('input[id="tiktok-url-input"]', input);
 
         // submit form
-        await page.click('button[type="submit"]');
+        await page.click('button[id="search-btn"]');
 
         // wait response
-        await page.waitForSelector('a.download_link.music', { timeout: 30000 });
+        await page.waitForSelector('.tk-down-link a');
 
         // link audio
-        const linkAudio = await page.$eval('a.download_link.music', el => el.href);
+        const downloadMp3Link = await page.evaluate(() => {
+            const links = Array.from(document.querySelectorAll('.tk-down-link a'));
+            const mp3Link = links.find(link => link.textContent.trim().toLowerCase() === 'download mp3');
+            return mp3Link ? mp3Link.href : null;
+        });
+
+        if(!downloadMp3Link) return ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
 
         // close
         await browser.close();
@@ -41,7 +47,7 @@ module.exports = async function (ctx) {
         logs({ text: `sending audio URL: ${input}` });
 
         ctx.reply(`🎵 Here you have the audio to download:`);
-        await ctx.replyWithAudio({ url: linkAudio, filename: 'musicAudioTiktok.mp3' }, menuHome);
+        await ctx.replyWithAudio({ url: downloadMp3Link, filename: 'musicAudioTiktok.mp3' }, menuHome);
     } catch (error) {
         log(error);
         ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
