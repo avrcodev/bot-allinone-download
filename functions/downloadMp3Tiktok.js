@@ -30,7 +30,7 @@ module.exports = async function (ctx) {
         await page.click('button[type="submit"]');
 
         // wait response
-        await page.waitForSelector('.result_overlay_buttons');
+        await page.waitForSelector('a.download_link.music', { timeout: 30000 });
 
         // link audio
         const linkAudio = await page.$eval('a.download_link.music', el => el.href);
