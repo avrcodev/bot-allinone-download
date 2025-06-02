@@ -10,10 +10,10 @@ module.exports = async function (ctx) {
         msg = msgHome.replace("{nameUser}", nameUser);
         menu = menuHome;
     
-        log(`---------------------------------------------------------------------`);
-        log(`<<---- New user start bot ---->>`);
-        log(`userId: ${userId} nameUser: ${nameUser}`);
-        log(`---------------------------------------------------------------------`);
+        console.log(`---------------------------------------------------------------------`);
+        console.log(`<<---- New user start bot ---->>`);
+        console.log(`userId: ${userId} nameUser: ${nameUser}`);
+        console.log(`---------------------------------------------------------------------`);
     
         ctx.reply(msg, menu);
     } catch (error) {

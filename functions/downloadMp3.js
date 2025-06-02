@@ -67,7 +67,7 @@ module.exports = async function (ctx) {
         ctx.reply(`🎵 Here you have the audio to download:`);
         await ctx.replyWithAudio({ url: audioUrl, filename: 'musicAudioYt.mp3' }, menuHome);
     } catch (error) {
-        log(error)
+        console.log(error)
         ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
     }
 };

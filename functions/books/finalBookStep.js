@@ -41,7 +41,7 @@ module.exports = async function (ctx, url, book) {
         // delete file when was send
         fs.unlinkSync(fileLocal);
     } catch (error) {
-        log(error)
+        console.log(error)
         ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
     }
 };

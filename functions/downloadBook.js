@@ -54,7 +54,7 @@ module.exports = async function (ctx) {
 
         await browser.close();
     } catch (error) {
-        log(error)
+        console.log(error)
         ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
     }
 };

@@ -35,7 +35,6 @@ module.exports = async function (ctx) {
         // link audio
         const downloadMp3Link = await page.evaluate(() => {
             const links = Array.from(document.querySelectorAll('.dl-action p a'));
-            log(links)
             const mp3Link = links.find(link => link.textContent.trim().toLowerCase() == 'descargar mp3');
             return mp3Link ? mp3Link.href : null;
         });
@@ -50,7 +49,7 @@ module.exports = async function (ctx) {
         ctx.reply(`🎵 Here you have the audio to download:`);
         await ctx.replyWithAudio({ url: downloadMp3Link, filename: 'musicAudioTiktok.mp3' }, menuHome);
     } catch (error) {
-        log(error);
+        console.log(error);
         ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
     }
 };

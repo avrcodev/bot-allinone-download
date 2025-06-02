@@ -1,7 +1,5 @@
 require('dotenv').config();
 
-global.log = console.log;
-
 const { Telegraf, session } = require('telegraf');
 const { setupBot } = require('./handlers/bot');
 
