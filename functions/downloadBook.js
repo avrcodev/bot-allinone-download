@@ -15,7 +15,6 @@ module.exports = async function (ctx) {
                 return ctx.reply(`👉 Don't write so much my king`, menuHome);
             } 
         }
-        
         logs({ text: `user need book Named: ${input}` });
 
         ctx.reply(`⏰ Wait, we are looking for your book.`);
