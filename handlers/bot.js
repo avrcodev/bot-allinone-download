@@ -1,3 +1,4 @@
+const { logs } = require("../functions/utils");
 const braker = require("./braker");
 const downloadBook = require("./downloadBook");
 const downloadMusicYoutube = require("./downloadMusicYoutube");
@@ -8,6 +9,7 @@ function setupBot(bot) {
 
     // Command /start
     bot.start(start);
+    logs({ text: "Bot stared" })
 
     bot.action("DOWNLOAD_YOUTUBE_MUSIC", downloadMusicYoutube);
     bot.action("DOWNLOAD_TIKTOK_AUDIO", downloadTiktokAudio);
