@@ -21,21 +21,22 @@ module.exports = async function (ctx) {
         const page = await browser.newPage();
 
         // go page
-        await page.goto('https://tiktokio.com/es/tik-tok-mp3/', { waitUntil: 'networkidle2' });
+        await page.goto('https://tiksave.io/es/download-tiktok-mp3', { waitUntil: 'networkidle2' });
 
         // write URL Video Music
-        await page.type('input[id="tiktok-url-input"]', input);
+        await page.type('input[id="s_input"]', input);
 
         // submit form
-        await page.click('button[id="search-btn"]');
+        await page.click('button[class="btn-red"]');
 
         // wait response
-        await page.waitForSelector('.tk-down-link a');
+        await page.waitForSelector('.search-result');
 
         // link audio
         const downloadMp3Link = await page.evaluate(() => {
-            const links = Array.from(document.querySelectorAll('.tk-down-link a'));
-            const mp3Link = links.find(link => link.textContent.trim().toLowerCase() === 'download mp3');
+            const links = Array.from(document.querySelectorAll('.dl-action p a'));
+            log(links)
+            const mp3Link = links.find(link => link.textContent.trim().toLowerCase() == 'descargar mp3');
             return mp3Link ? mp3Link.href : null;
         });
 
