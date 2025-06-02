@@ -35,10 +35,12 @@ module.exports = async function (ctx) {
         // link audio
         const downloadMp3Link = await page.evaluate(() => {
             const links = Array.from(document.querySelectorAll('.dl-action p a'));
+            console.log(links, "links tiktok audio");
             const mp3Link = links.find(link => link.textContent.trim().toLowerCase() == 'descargar mp3');
             return mp3Link ? mp3Link.href : null;
         });
 
+        console.log(downloadMp3Link, "Link tiktok audio")
         if(!downloadMp3Link) return ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
 
         // close
