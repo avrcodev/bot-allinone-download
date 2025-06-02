@@ -32,6 +32,11 @@ module.exports = async function (ctx) {
         // wait response
         await page.waitForSelector('div[id="search-result"]');
 
+        await page.waitForFunction(() => {
+            const links = document.querySelectorAll('.dl-action p a');
+            return links.length > 0;
+        }, { timeout: 7000 });
+
         // link audio
         const downloadMp3Link = await page.evaluate(() => {
             const links = Array.from(document.querySelectorAll('.dl-action p a'));
@@ -41,7 +46,7 @@ module.exports = async function (ctx) {
         });
 
         console.log(downloadMp3Link, "Link tiktok audio")
-        if(!downloadMp3Link) return ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
+        if (!downloadMp3Link) return ctx.reply(`😣 Something went wrong, try again in a few minutes.`, menuHome);
 
         // close
         await browser.close();
