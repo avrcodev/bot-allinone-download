@@ -8,13 +8,16 @@ module.exports = async function (ctx) {
         const input = ctx.message.text;
 
         let isValidURL = isYoutubeURL(input);
-        if(!isValidURL) return ctx.reply(`😣 Send a valid URL.`);
+        if (!isValidURL) return ctx.reply(`😣 Send a valid URL.`);
 
         logs({ text: `user need music youtube URL: ${input}` });
 
         ctx.reply(`⏰ Hold on, we are downloading your audio:`);
 
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
 
         // go page
