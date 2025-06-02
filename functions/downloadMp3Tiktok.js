@@ -30,7 +30,7 @@ module.exports = async function (ctx) {
         await page.click('button[class="btn-red"]');
 
         // wait response
-        await page.waitForSelector('.search-result');
+        await page.waitForSelector('div[id="search-result"]');
 
         // link audio
         const downloadMp3Link = await page.evaluate(() => {
