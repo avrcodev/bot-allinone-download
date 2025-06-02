@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
 const { logs, isTiktokValidURL } = require('./utils');
 const { menuHome } = require('../resources/menus');
 
@@ -14,7 +14,7 @@ module.exports = async function (ctx) {
 
         ctx.reply(`⏰ Hold on, we are downloading your audio:`);
 
-        const browser = await puppeteer.launch({ headless: true });
+        // const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
 
         // go page
