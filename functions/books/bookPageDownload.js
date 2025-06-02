@@ -20,14 +20,19 @@ module.exports = async function (ctx, book) {
         // wait response
         await page.waitForSelector('input[id="download2"]');
 
+        const existingPages = await browser.pages();
+        await page.click('input[id="download2"]');
+
         // click download button pdf and detect new window
-        const [newPage] = await Promise.all([
-            new Promise(resolve => browser.once('targetcreated', async target => resolve(await target.page()))),
-            page.click('input[id="download2"]'),
-        ]);
+        const newTarget = await browser.waitForTarget(target => {
+            return !existingPages.some(p => p.target()._targetId === target._targetId);
+        }, { timeout: 5000 });
+
+        const newPage = await newTarget.page();
 
         await newPage.bringToFront();
         await newPage.waitForNavigation({ waitUntil: 'networkidle2' });
+        
         const finalUrl = newPage.url();
         finalBookStep(ctx, finalUrl, book)
 
