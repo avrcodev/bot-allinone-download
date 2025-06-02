@@ -9,7 +9,10 @@ module.exports = async function (ctx, url, book) {
     try {
         logs({ text: `URL end: ${url}` })
 
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
 
         // go page

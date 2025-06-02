@@ -22,7 +22,10 @@ module.exports = async function (ctx) {
         const encodedQuery = encodeURIComponent(input);
         const url = `https://ww3.lectulandia.com/search/${encodedQuery.replace(/%20/g, '+')}`;
 
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
 
         // go page

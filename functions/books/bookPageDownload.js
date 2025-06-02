@@ -8,7 +8,10 @@ module.exports = async function (ctx, book) {
     try {
         logs({ text: `Book to download: ${JSON.stringify(book)}` })
 
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
         const page = await browser.newPage();
 
         // go page
