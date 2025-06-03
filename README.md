@@ -18,7 +18,7 @@ A Telegram bot to automatically download content from various sources like books
 ## 🤖 Live Bot
 
 Try the bot here on Telegram:  
-👉 [@FileDownloadAllBot](https://t.me/@FileDownloadAllBot)
+👉 [@FileDownloadAllBot](https://t.me/FileDownloadAllBot)
 
 ---
 
