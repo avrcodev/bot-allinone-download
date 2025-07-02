@@ -27,7 +27,7 @@ Try the bot here on Telegram:
 ### 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/bot-allinone-download.git
+git clone https://github.com/avrcodev/bot-allinone-download.git
 cd bot-allinone-download
 ```
 
